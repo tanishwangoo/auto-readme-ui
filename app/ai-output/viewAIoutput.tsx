@@ -14,7 +14,8 @@ export default function ViewAIOutput() {
     const [isHydrated, setIsHydrated] = useState(false); // Flag to track hydration
     const DownloadBtnRef = useRef<HTMLButtonElement>(null);
 
-    const BASE_AI_URL = "http://api.autoreadme.online/ai";
+    const BASE_AI_URL_UNSAFE = "http://68.183.148.243/ai";
+    const BASE_AI_URL = "https://api.autoreadme.online/ai";
 
 
     const router = useRouter();

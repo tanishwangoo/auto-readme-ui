@@ -1,4 +1,4 @@
-const BASE_AI_URL = "http://api.autoreadme.online/ai";
+const BASE_AI_URL = "https://api.autoreadme.online/ai";
 
 const getAIOutput = async (filename : any, instrfilepath: any)=>{
     try{
