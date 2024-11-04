@@ -1,6 +1,8 @@
+const BASE_AI_URL = "http://api.autoreadme.online/ai";
+
 const getAIOutput = async (filename : any, instrfilepath: any)=>{
     try{
-        const response = await fetch(`http://localhost:5000/ai/askAI?filename=${encodeURIComponent(filename)}&
+        const response = await fetch(`${BASE_AI_URL}/askAI?filename=${encodeURIComponent(filename)}&
         instrfile=${encodeURIComponent(instrfilepath)}`,{
             method: 'GET'
             })

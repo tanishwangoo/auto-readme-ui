@@ -1,7 +1,7 @@
-
+const BASE_URL = "http://api.autoreadme.online";
 const getContextFile = async (filename : any)=>{
     try{
-        const response = await fetch(`http://localhost:5000/context-file?view=${encodeURIComponent(filename)}`,{
+        const response = await fetch(`${BASE_URL}/context-file?view=${encodeURIComponent(filename)}`,{
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

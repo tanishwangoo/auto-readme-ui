@@ -13,6 +13,10 @@ export default function ViewAIOutput() {
     const [aioutput, setAIoutput] = useState(() => storage.getItem('cachedAIOutput') || '');
     const [isHydrated, setIsHydrated] = useState(false); // Flag to track hydration
     const DownloadBtnRef = useRef<HTMLButtonElement>(null);
+
+    const BASE_AI_URL = "http://api.autoreadme.online/ai";
+
+
     const router = useRouter();
     const downloadMarkdown = () => {
         const blob = new Blob([aioutput], { type: 'text/markdown' });
@@ -31,7 +35,7 @@ export default function ViewAIOutput() {
         if (!aioutput) {
             const getAIOutput = async (filename : string, instrfilepath: string) => {
                 try {
-                    const response = await fetch(`http://localhost:5000/ai/askAI?filename=${encodeURIComponent(filename)}&instrfile=${encodeURIComponent(instrfilepath)}`, {
+                    const response = await fetch(`${BASE_AI_URL}/askAI?filename=${encodeURIComponent(filename)}&instrfile=${encodeURIComponent(instrfilepath)}`, {
                         method: 'GET'
                     });
 
