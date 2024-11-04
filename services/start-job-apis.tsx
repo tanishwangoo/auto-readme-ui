@@ -1,4 +1,4 @@
-const BASE_SETUP_URL = "https://api.autoreadme.online/setup";
+const BASE_SETUP_URL = "https://autoreadme-api.online/setup";
 
 const sendDatatest = async (payload : any)=>{
     try{

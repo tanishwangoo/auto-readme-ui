@@ -1,4 +1,4 @@
-const BASE_URL = "https://api.autoreadme.online";
+const BASE_URL = "https://autoreadme-api.online";
 const getContextFile = async (filename : any)=>{
     try{
         const response = await fetch(`${BASE_URL}/context-file?view=${encodeURIComponent(filename)}`,{

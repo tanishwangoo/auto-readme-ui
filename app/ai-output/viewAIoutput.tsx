@@ -15,7 +15,7 @@ export default function ViewAIOutput() {
     const DownloadBtnRef = useRef<HTMLButtonElement>(null);
 
     const BASE_AI_URL_UNSAFE = "http://68.183.148.243/ai";
-    const BASE_AI_URL = "https://api.autoreadme.online/ai";
+    const BASE_AI_URL = "https://autoreadme-api.online/ai";
 
 
     const router = useRouter();
