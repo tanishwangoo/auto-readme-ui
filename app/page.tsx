@@ -41,7 +41,7 @@ const Home: React.FC = () => {
   };
 
 
-  var styleno = '.txt';
+  let styleno = '.txt';
   switch (config.output.style) {
     case 'markdown':
       styleno = '.md'
