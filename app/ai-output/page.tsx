@@ -76,23 +76,22 @@ export default function ViewContent() {
     }, [responsedone]);
 
     return (
-        <div className="flex flex-col justify-center items-center min-h-screen">
+        <div className="mt-5 gap-5 flex flex-col justify-center items-center min-h-screen">
             {(responsedone) ?
                 <div className="flex flex-row gap-2">
                     <CopyButton code={aioutput} />
-                    <button ref={DownloadBtnRef} className="btn btn-accent" onClick={downloadMarkdown}>Download File</button>
-                    <button onClick={() => router.push('/')} className="btn btn-base text-secondary">Go to Home</button>
+                    <button ref={DownloadBtnRef} className="btn btn-primary" onClick={downloadMarkdown}>Download File</button>
+                    <button onClick={() => router.push('/')} className="btn btn-neutral text">Go to Home</button>
                 </div> : <></>
             }
-            <div className="mockup-code bg-primary text-primary-content w-full max-w-3xl h-auto overflow-hidden rounded-lg shadow-lg">
-                <pre className="p-4">
+            <div className="mockup-code bg-primary text-primary-content w-fit max-w-3xl h-auto overflow-hidden rounded-lg shadow-lg">
                     <code>
                         {/* Render MarkdownPreview only after hydration */}
                         {isHydrated && (
                             <MarkdownPreview source={aioutput} style={{ padding: 16 }} disableCopy={false} />
-                        )}              </code>
-                </pre>
-            </div>
+                        )}              
+                    </code>
+        </div>
         </div>
     );
 

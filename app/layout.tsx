@@ -28,7 +28,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
+      <header className="bg-accent text-primary-content p-4 shadow-lg flex justify-between items-center">
+      <h1 className="text-2xl font-bold">Auto README Generator</h1>
+      </header>
         {children}
+        {/* Footer */}
+        <footer className="bg p-4 text-center">
+          <p>&copy; {new Date().getFullYear()} Auto README Generator. All rights reserved.</p>
+        </footer>
       </body>
     </html>
   );

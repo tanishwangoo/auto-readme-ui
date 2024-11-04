@@ -8,50 +8,30 @@ const config: Config = {
   ],
   plugins: [daisyui,],
   daisyui: {
-    themes: ["light", "dark", "cupcake", {
+    themes: [
+      {
       mytheme: {
           
-        "primary": "#2563eb",
+        "primary": "#0a21c0",
                   
-        "primary-content": "#d2e2ff",
+        "secondary": "#050a44",
                   
-        "secondary": "#ffff",
+        "accent": "#2c2e3a",
                   
-        "secondary-content": "#161616",
+        "neutral": "#b3b4bd",
                   
-        "accent": "#00ffff",
+        "base-100": "#141619",
                   
-        "accent-content": "#001616",
+        "info": "#a5f3fc",
                   
-        "neutral": "#ddd6fe",
+        "success": "#86efac",
                   
-        "neutral-content": "#111016",
-                  
-        "base-100": "#1c1917",
-                  
-        "base-200": "#171412",
-                  
-        "base-300": "#12100e",
-                  
-        "base-content": "#cccbcb",
-                  
-        "info": "#7dd3fc",
-                  
-        "info-content": "#051016",
-                  
-        "success": "#00ff00",
-                  
-        "success-content": "#001600",
-                  
-        "warning": "#facc15",
-                  
-        "warning-content": "#150f00",
+        "warning": "#fcd34d",
                   
         "error": "#ff0000",
-                  
-        "error-content": "#160000",
-        },
-    },],
+          }
+      },
+    ],
   },
 };
 export default config;

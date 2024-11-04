@@ -7,6 +7,7 @@ import { getContextFile } from "@/services/getTextAPI";
 import CopyButton from '../../components/ui/CopytoClipbd'
 import { useRouter } from "next/navigation";
 import storage from "local-storage-fallback";
+import { useCollapse } from 'react-collapsed';
 
 
 const addSearchParam = (key: string, value: string, key2: string, value2: string) => {
@@ -24,6 +25,8 @@ export default function ViewContent() {
     const instrfilepath = searchParams.get('instrfilepath');
     const styleparam = searchParams.get('style');
     const router = useRouter();
+    const { getCollapseProps, getToggleProps, isExpanded } = useCollapse();
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -40,7 +43,7 @@ export default function ViewContent() {
             setStyle(styleparam)
         }
     }, []);
-    const handleroutechange = ()=>{
+    const handleroutechange = () => {
         const params = addSearchParam('filename', `${outputFileName}`, 'instrfilepath', `${instrfilepath}`);
         storage.setItem('cachedAIOutput', '');
         router.push(`/ai-output?${params}`);
@@ -48,17 +51,18 @@ export default function ViewContent() {
 
 
     return (
-        <div>
-            <h1> Your Custom AI context is here! </h1>
-            <div className='flex flex-row gap-2 items-center justify-center align-center'>
+        <div className="min-h-screen flex flex-col gap-5  bg-base-100 p-6">
+            {/* Main Content */}
+            <h2 className="text-lg font-semibold text-neutral text-center mb-4">Here is your custom AI-generated context!</h2>
+
+            <div className="flex flex-row gap-4 items-center justify-center">
                 <CopyButton code={outputText} />
-                <button onClick={handleroutechange}className='btn btn-accent'>
+                <button onClick={handleroutechange} className="btn btn-accent">
                     Ask AI
                 </button>
             </div>
-            <br/>
-            <ContentBlock content={outputText} style={style} />
-            </div>
-        )
+            <ContentBlock content={outputText} style={style}/>
+        </div>
+    )
 }
 
