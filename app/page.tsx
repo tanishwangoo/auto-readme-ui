@@ -8,6 +8,9 @@ import { ValidateAndSend, SendInstruction, StartRepoJob } from "@/services/start
 
 import AlertMessage from "@/components/ui/errr-cmp";
 import { SiStryker } from "react-icons/si";
+import { Hero } from "@/components/ui/Hero";
+import { InputForm } from "@/components/ui/InputForm";
+import { SettingsPanel } from "@/components/ui/SettingsPanel";
 
 const Home: React.FC = () => {
   const [config, setConfig] = useState(defaultConfig);
@@ -20,40 +23,42 @@ const Home: React.FC = () => {
   const validextns = new Set<string | undefined>(['md', 'txt', 'xml']);
 
   // Updated handleChange function
-  const handleChange = (
+  const handleConfigChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     section: "output" | "ignore" | "security"
   ) => {
     const { name, value, type } = event.target;
-    const updatedValue = type === "checkbox"
-      ? (event.target as HTMLInputElement).checked
-      : type === "number"
-        ? parseInt(value, 10)
-        : value;
+
+    const updatedValue =
+      type === "checkbox"
+        ? (event.target as HTMLInputElement).checked
+        : type === "number"
+          ? parseInt(value, 10)
+          : value;
 
     setConfig((prevConfig) => ({
       ...prevConfig,
       [section]: {
         ...prevConfig[section],
-        [name]: updatedValue,
+        [name]: name === "filePath" ? updatedValue + stylecode : updatedValue,
       },
     }));
   };
 
 
-  let styleno = '.txt';
+  let stylecode = '.txt';
   switch (config.output.style) {
     case 'markdown':
-      styleno = '.md'
+      stylecode = '.md'
       break;
     case 'plain':
-      styleno = '.txt'
+      stylecode = '.txt'
       break;
     case 'xml':
-      styleno = '.xml'
+      stylecode = '.xml'
       break;
   }
-  const removeextension = (filename : string | undefined) =>{
+  const removeextension = (filename: string | undefined) => {
     const parts = filename?.split('.');
     if (parts?.length) {
       const extension = parts?.pop(); // Get the extension (last part)
@@ -91,9 +96,9 @@ const Home: React.FC = () => {
     if (!gitURL) {
       setShowError(true);
       seterrmsg('Invalid Repo Name');
-    } 
+    }
     else if (!validextns.has(removeextension(config.output.filePath).extension)
-    || removeextension(config.output.filePath).baseName == ''){
+      || removeextension(config.output.filePath).baseName == '') {
       setShowError(true);
       seterrmsg('Please add valid File Name');
     }
@@ -107,15 +112,9 @@ const Home: React.FC = () => {
 
 
   return (
-    <div className="min-h-screen flex flex-col">
-      {/* Header */}
-      {/* <DarkModeToggle /> */}
 
-      {/* Main Content */}
-      <main className="flex-1 flex flex-col items-center text-center gap-4 p-6 bg-base-100">
-        {showError && <AlertMessage hideAlert={hideAlert} text={errrmsg} />}
-
-        {/* Loading overlay */}
+    <div className="min-h-screen bg-base-100">
+      <div className="relative overflow-hidden">
         {isloading && (
           <div className="absolute inset-0 flex items-center justify-center bg-opacity-75 z-10">
             <div className="loader"></div>
@@ -123,117 +122,54 @@ const Home: React.FC = () => {
         )}
 
         <div className={`transition-all ${isloading ? 'blur-md opacity-50' : ''}`}>
-          <div className="text-3xl text-neutral font-semibold  mb-6">Create READMEs automatically</div>
-
-          <div className="form-control flex flex-col gap-4 items-center w-full max-w-lg">
 
 
-            <div className="relative w-full">
-              <input
-                type="text"
-                name="filePath"
-                placeholder="Enter Output File Name"
-                className="input input-bordered input-accent w-full pr-20"
-                value={removeextension(config.output.filePath).baseName + styleno}
-                onChange={(event) => handleChange(event, "output")}
+          {showError && <AlertMessage hideAlert={hideAlert} text={errrmsg} />}
+
+          {/* Background Pattern */}
+          <div className="absolute inset-0 bg-grid-white/[0.02] bg-[size:60px_60px]" />
+          <div className="absolute inset-0 bg-gradient-to-t from-base-100 via-transparent to-transparent" />
+
+          <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <Hero />
+
+            <div className="grid lg:grid-cols-2 gap-8 items-start">
+              <InputForm
+                gitURL={gitURL}
+                setGitURL={setGitURL}
+                filePath={removeextension(config.output.filePath).baseName}
+                filecode={stylecode}
+                setFilePath={(path) => handleConfigChange(path, "output")}
+                instructions={instructions}
+                setInstructions={setInstructions}
               />
-              <div className="badge badge-secondary absolute right-2 top-1/2 transform -translate-y-1/2">
-                {styleno}
+              <SettingsPanel
+                config={config.output}
+                onConfigChange={handleConfigChange}
+              />
+            </div>
+
+            {/*Json Payload for testing purposes */}
+            <div className="items-center flex flex-col">
+              <div className="bg-base-100 border rounded-lg p-4 mt-4 w-fit">
+                <p className="text-left font-medium">JSON Payload:</p>
+                <pre className="text-left">{JSON.stringify(config, null, 2)}</pre>
               </div>
             </div>
-            <input
-              type="text"
-              name="EnterURL"
-              required
-              placeholder="Enter GitHub URL"
-              className="input input-bordered input-accent w-full"
-              onChange={(event) => setGitURL(event.target.value)}
-            />
-
-            <div className="flex flex-col gap-4 w-fit">
-              <label className="label cursor-pointer flex justify-between">
-                <span className="label-text font-medium">Style:</span>
-                <select
-                  name="style"
-                  className="ml-5 select select-bordered w-full"
-                  onChange={(event) => {
-                    handleChange(event, "output");
-                  }
-                  }
-                  defaultValue={"plain"}
-                >
-                  <option value="xml">XML</option>
-                  <option value="plain">Plain</option>
-                  <option value="markdown">Markdown</option>
-                </select>
-              </label>
-
-              <label className="label cursor-pointer flex justify-between">
-                <span className="label-text">Remove Comments</span>
-                <input
-                  type="checkbox"
-                  name="removeComments"
-                  className="checkbox checkbox-primary"
-                  checked={config.output.removeComments}
-                  onChange={(event) => handleChange(event, "output")}
-                />
-              </label>
-
-              <label className="label cursor-pointer flex justify-between">
-                <span className="label-text">Remove Empty Lines</span>
-                <input
-                  type="checkbox"
-                  name="removeEmptyLines"
-                  className="checkbox checkbox-primary"
-                  checked={config.output.removeEmptyLines}
-                  onChange={(event) => handleChange(event, "output")}
-                />
-              </label>
-
-              <label className="label cursor-pointer flex justify-between">
-                <span className="label-text">Top File Summary</span>
-                <input
-                  type="number"
-                  name="topFilesLength"
-                  className=" ml-5 input input-bordered w-24"
-                  value={config.output.topFilesLength}
-                  onChange={(event) => handleChange(event, "output")}
-                />
-              </label>
-
-              <label className="label cursor-pointer flex justify-between">
-                <span className="label-text">Show Line Numbers</span>
-                <input
-                  type="checkbox"
-                  name="showLineNumbers"
-                  className="checkbox checkbox-primary"
-                  checked={config.output.showLineNumbers}
-                  onChange={(event) => handleChange(event, "output")}
-                />
-              </label>
+            <div className="mt-8 text-center">
+              <button
+                onClick={handleGenerate}
+                className="btn btn-primary btn-lg gap-2 hover:scale-105 transition-transform"
+              >
+                Generate README
+              </button>
             </div>
-
-            <textarea
-              className="textarea textarea-bordered w-full mt-4"
-              placeholder="Add Explicit Instructions"
-              onChange={(e) => setInstructions(e.target.value)}
-            ></textarea>
-
-            <div className="bg-base-100 border rounded-lg p-4 mt-4 w-fit">
-              <p className="text-left font-medium">JSON Payload:</p>
-              <pre className="text-left">{JSON.stringify(config, null, 2)}</pre>
-            </div>
-
-            <button onClick={handleGenerate} className="btn btn-primary w-full mt-6">
-              Generate Context!
-            </button>
           </div>
         </div>
-      </main>
-
-
+      </div>
     </div>
   );
 };
 
 export default Home;
+
