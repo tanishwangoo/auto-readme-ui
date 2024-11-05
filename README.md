@@ -1,36 +1,130 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Auto README Generator
 
-## Getting Started
+A sophisticated web application designed to automatically generate comprehensive README documentation for GitHub repositories. This tool streamlines the documentation process by analyzing repository content and producing well-structured README files with minimal user input.
 
-First, run the development server:
+[![Next.js](https://img.shields.io/badge/Built%20with-Next.js-black)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/Language-TypeScript-blue)](https://www.typescriptlang.org/)
+[![DaisyUI](https://img.shields.io/badge/UI-DaisyUI-green)](https://daisyui.com/)
 
+## 🚀 Features
+
+- **Automatic README Generation**: Analyzes GitHub repositories and generates detailed README documentation
+- **Custom Instructions**: Support for user-defined documentation requirements
+- **Multiple Output Formats**: Generate documentation in Markdown, Plain Text, or XML formats
+- **Real-time Preview**: Live preview of generated documentation with syntax highlighting
+- **Configurable Settings**:
+  - Line number display
+  - Comment removal
+  - Empty line handling
+  - Top files summary customization
+- **Dark Mode Support**: Built-in theme switching for better visibility
+- **Copy & Download**: Easy copying and downloading of generated content
+- **Security Checks**: Built-in repository security validation
+
+## 🛠️ Technology Stack
+
+- **Frontend Framework**: Next.js 15.0.2
+- **Language**: TypeScript
+- **Styling**: 
+  - Tailwind CSS
+  - DaisyUI components
+- **UI Components**:
+  - React Markdown Preview
+  - React Code Block
+  - Lucide React Icons
+- **State Management**: React Hooks with Local Storage
+- **API Integration**: REST APIs with streaming support
+
+## 📋 Prerequisites
+
+- Node.js (Latest LTS version recommended)
+- npm or yarn package manager
+- Git
+
+## 💻 Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/auto-readme-generator.git
+cd auto-readme-generator
+```
+
+2. Install dependencies:
+```bash
+npm install
+# or
+yarn install
+```
+
+3. Start the development server:
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The application will be available at `http://localhost:3005`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🔧 Configuration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The application can be configured through the UI with the following options:
 
-## Learn More
+```typescript
+{
+    output: {
+        filePath: string,
+        style: "xml" | "plain" | "markdown",
+        removeComments: boolean,
+        removeEmptyLines: boolean,
+        topFilesLength: number,
+        showLineNumbers: boolean
+    },
+    security: {
+        enableSecurityCheck: boolean
+    }
+}
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 📖 Usage
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Enter your GitHub repository URL in the input field
+2. Configure output settings:
+   - Select output format (Markdown/Plain Text/XML)
+   - Adjust file handling preferences
+   - Set line number display options
+3. Add custom instructions (optional)
+4. Click "Generate README" to create documentation
+5. Preview, copy, or download the generated content
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 📁 Project Structure
 
-## Deploy on Vercel
+```
+auto-readme-generator/
+├── app/                    # Next.js application pages
+│   ├── ai-output/         # AI generation output components
+│   ├── view-context/      # Context viewing components
+│   └── layout.tsx         # Root layout component
+├── components/            # Reusable React components
+│   └── ui/               # UI-specific components
+├── services/             # API and service integrations
+├── public/               # Static assets
+└── styles/               # Global styles and themes
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## 🤝 Contributing
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Contributions are welcome! Please follow these steps:
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## 🔜 Future Improvements
+
+- [ ] Add support for multiple GitHub authentication methods
+- [ ] Implement custom template system for README generation
+- [ ] Add batch processing for multiple repositories
+- [ ] Enhance AI analysis capabilities
+- [ ] Add support for more output formats
