@@ -17,7 +17,7 @@ export default function ViewAIOutput() {
     const BASE_AI_URL_UNSAFE = "http://68.183.148.243/ai";
     const BASE_AI_URL = "https://autoreadme-api.online/ai";
 
-
+    const localhostURL = "http://localhost:5000/ai";
     const router = useRouter();
     const downloadMarkdown = () => {
         const blob = new Blob([aioutput], { type: 'text/markdown' });

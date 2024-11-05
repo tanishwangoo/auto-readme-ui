@@ -149,13 +149,13 @@ const Home: React.FC = () => {
               />
             </div>
 
-            {/*Json Payload for testing purposes */}
+            {/* Json Payload for testing purposes
             <div className="items-center flex flex-col">
               <div className="bg-base-100 border rounded-lg p-4 mt-4 w-fit">
                 <p className="text-left font-medium">JSON Payload:</p>
                 <pre className="text-left">{JSON.stringify(config, null, 2)}</pre>
               </div>
-            </div>
+            </div> */}
             <div className="mt-8 text-center">
               <button
                 onClick={handleGenerate}
