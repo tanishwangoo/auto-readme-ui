@@ -36,7 +36,7 @@ export default function ViewAIOutput() {
         if (!aioutput) {
             const getAIOutput = async (filename : string, instrfilepath: string) => {
                 try {
-                    const response = await fetch(`${BASE_AI_URL}/askAI?filename=${encodeURIComponent(filename)}&instrfile=${encodeURIComponent(instrfilepath)}`, {
+                    const response = await fetch(`${localhostURL}/askAI?filename=${encodeURIComponent(filename)}&instrfile=${encodeURIComponent(instrfilepath)}`, {
                         method: 'GET'
                     });
 

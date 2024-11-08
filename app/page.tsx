@@ -1,5 +1,5 @@
 "use client"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { defaultConfig, ConfigJSON } from "@/components/ui/configJSON";
 import { useRouter } from "next/navigation";
 import DarkModeToggle from "@/components/ui/darkModeToggle";
@@ -15,6 +15,7 @@ import { SettingsPanel } from "@/components/ui/SettingsPanel";
 const Home: React.FC = () => {
   const [config, setConfig] = useState(defaultConfig);
   const [instructions, setInstructions] = useState<string>('');
+  const [stylecode, setStylecode] = useState<string>('.txt');
   const [gitURL, setGitURL] = useState<string>('');
   const [showError, setShowError] = useState(false);
   const [errrmsg, seterrmsg] = useState<string>('');
@@ -44,20 +45,36 @@ const Home: React.FC = () => {
       },
     }));
   };
+  
+  const FilePathChange = (updatedValue : string | undefined) => {
+    setConfig((prevConfig) => ({
+      ...prevConfig,
+      output: {
+        ...prevConfig.output,
+        filePath: updatedValue + stylecode
+      }
+    }));
+  };
 
+  useEffect(() =>{
+    changestylecode();
+    FilePathChange(removeextension(config.output.filePath).baseName);
+  }, [config.output.style, stylecode])
 
-  let stylecode = '.txt';
-  switch (config.output.style) {
-    case 'markdown':
-      stylecode = '.md'
-      break;
-    case 'plain':
-      stylecode = '.txt'
-      break;
-    case 'xml':
-      stylecode = '.xml'
-      break;
+  const changestylecode = ()=>{
+    switch (config.output.style) {
+      case 'markdown':
+        setStylecode('.md');
+        break;
+      case 'plain':
+        setStylecode('.txt');
+        break;
+      case 'xml':
+        setStylecode('.xml');
+        break;
+    }
   }
+
   const removeextension = (filename: string | undefined) => {
     const parts = filename?.split('.');
     if (parts?.length) {
@@ -148,8 +165,8 @@ const Home: React.FC = () => {
                 onConfigChange={handleConfigChange}
               />
             </div>
-
-            {/* Json Payload for testing purposes
+{/* 
+            Json Payload for testing purposes
             <div className="items-center flex flex-col">
               <div className="bg-base-100 border rounded-lg p-4 mt-4 w-fit">
                 <p className="text-left font-medium">JSON Payload:</p>

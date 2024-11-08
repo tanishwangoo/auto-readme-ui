@@ -16,7 +16,7 @@ interface Props {
   
     return (
       <CopyToClipboard text={code} onCopy={handleCopy}>
-        <button className="w-fit btn-rounded-full btn btn-secondary">
+        <button className="w-fixed btn-rounded-full btn btn-secondary">
           <div className="flex flex-row gap-1">
             <FaRegCopy />
             <p>{isCopied ? "Copied!" : "Copy To Clipboard"}</p>

@@ -31,3 +31,19 @@
   @keyframes l7 {
     to {background-position: 150% 0%}
   }
+
+
+  .code-block-container {
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+
+  }
+  .code-block-wrapper{
+    white-space: pre-wrap;      /* Wraps long lines */
+    word-break: break-word;  
+  }
+  
+  .code-block-container.open {
+    opacity: 1;
+  }
+  

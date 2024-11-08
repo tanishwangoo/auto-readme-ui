@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import Link from "next/link";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -29,7 +30,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased `}
       >
       <header className="bg-accent text-primary-content p-4 shadow-lg flex justify-between items-center">
+      <Link href={'/'}>
       <h1 className="text-2xl font-bold">Auto README Generator</h1>
+      </Link>
       </header>
         {children}
         {/* Footer */}
