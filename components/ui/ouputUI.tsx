@@ -11,7 +11,7 @@ interface BlockProps {
 
 const ContentBlock: React.FC<BlockProps> = ({ content, style }) => {
   const [selectedPart, setSelectedPart] = useState<string | null>(null);
-  let [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const handleDialogPopup = (key: string) => {
     setIsOpen(true);
     setSelectedPart(key);

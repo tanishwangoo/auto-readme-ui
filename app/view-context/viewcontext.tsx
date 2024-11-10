@@ -31,7 +31,7 @@ export default function ViewContent() {
     const [isloading, setIsLoading] = useState<boolean>(false);
     useEffect(() => {
         const fetchData = async () => {
-            var tempfulltxt='';
+            let tempfulltxt='';
             const outputtext: { [key: string]: string } = await getContextFile(outputFileName);
             if (outputtext) {
                 Object.values(outputtext).forEach((el)=>{
