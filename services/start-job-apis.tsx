@@ -20,7 +20,7 @@ const sendDatatest = async (payload : any)=>{
 
 const ValidateAndSend = async (payload : any) =>{
     try {
-        const response  = await fetch(`${localhostURL}/check-valid-config`, {
+        const response  = await fetch(`${BASE_SETUP_URL}/check-valid-config`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -42,7 +42,7 @@ const ValidateAndSend = async (payload : any) =>{
 const SendInstruction = async (instructiondata : string) =>{
     const payload = JSON.stringify({'instruction-content' : instructiondata})
     try {
-        const response  = await fetch(`${localhostURL}/send-instruction`, {
+        const response  = await fetch(`${BASE_SETUP_URL}/send-instruction`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -64,7 +64,7 @@ const SendInstruction = async (instructiondata : string) =>{
 const StartRepoJob = async (gitURL : string) =>{
     const payload = JSON.stringify({'git-url' : gitURL})
     try {
-        const response  = await fetch(`${localhostURL}/send-url`, {
+        const response  = await fetch(`${BASE_SETUP_URL}/send-url`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
