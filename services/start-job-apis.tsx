@@ -2,7 +2,7 @@ const BASE_SETUP_URL = "https://autoreadme-api.online/setup";
 const localhostURL = "http://localhost:5000/setup";
 const sendDatatest = async (payload : any)=>{
     try{
-        const response = await fetch(`${localhostURL}/sendconfig`,{
+        const response = await fetch(`${BASE_SETUP_URL}/sendconfig`,{
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
